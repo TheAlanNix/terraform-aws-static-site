@@ -14,6 +14,9 @@ jobs:
   Terraform:
     name: Terraform Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        terraform-version: ["~0.14.0", "~0.15.0", "~1.0"]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -21,16 +24,16 @@ jobs:
       - name: Terraform Security Scan
         uses: triat/terraform-security-scan@v3
 
-      - name: Terraform Setup
+      - name: Terraform Setup ${{ matrix.python-version }}
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: ~0.14.0
+          terraform_version: ${{ matrix.python-version }}
 
-      - name: Terraform Init
+      - name: Terraform Init ${{ matrix.python-version }}
         id: init
         run: terraform init
 
-      - name: Terraform Validate
+      - name: Terraform Validate ${{ matrix.python-version }}
         id: validate
         run: terraform validate
         env:
