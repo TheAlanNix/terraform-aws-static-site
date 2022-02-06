@@ -16,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        terraform-version: ["~0.14.0", "~0.15.0", "~1.0"]
+        terraform-version: ["~0.14.0", "~0.15.0", "~1.0", "~1.1"]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
       - name: Terraform Security Scan
-        uses: triat/terraform-security-scan@v3
+        uses: aquasecurity/tfsec-action@v1.0.0
 
       - name: Terraform Setup ${{ matrix.python-version }}
         uses: hashicorp/setup-terraform@v1
