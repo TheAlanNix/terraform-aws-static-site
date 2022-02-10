@@ -2,7 +2,9 @@ resource "random_id" "uniq" {
   byte_length = 4
 }
 
-#tfsec:ignore:AWS002 tfsec:ignore:AWS077
+
+#tfsec:ignore:aws-s3-enable-bucket-logging
+#tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "main" {
   bucket = "${var.fqdn}-www-${random_id.uniq.hex}"
   acl    = "private"
@@ -28,6 +30,10 @@ resource "aws_s3_bucket" "main" {
       "Name" = "${var.fqdn}-www-${random_id.uniq.hex}"
     },
   )
+
+  versioning {
+    enabled = true
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "main" {

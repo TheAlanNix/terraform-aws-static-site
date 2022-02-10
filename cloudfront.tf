@@ -2,7 +2,8 @@ resource "aws_cloudfront_origin_access_identity" "default" {
   comment = "s3-oai-${var.fqdn}"
 }
 
-#tfsec:ignore:AWS045 tfsec:ignore:AWS071
+#tfsec:ignore:aws-cloudfront-enable-logging
+#tfsec:ignore:aws-cloudfront-enable-waf
 resource "aws_cloudfront_distribution" "s3_distribution" {
 
   http_version = "http2"
