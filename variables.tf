@@ -23,7 +23,7 @@ variable "force_destroy" {
 
 variable "index_document" {
   type        = string
-  description = "HTML to show at root"
+  description = "HTML file to show at root"
   default     = "index.html"
 }
 
