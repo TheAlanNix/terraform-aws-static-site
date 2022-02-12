@@ -1,17 +1,17 @@
 variable "fqdn" {
   type        = string
-  description = "The FQDN of the website and also name of the S3 bucket"
+  description = "The primary FQDN of the website and also name of the S3 bucket"
 }
 
 variable "aliases" {
   type        = list(string)
-  description = "Any other domain aliases to add to the CloudFront distribution"
+  description = "Additional domain aliases to add to the CloudFront distribution"
   default     = []
 }
 
 variable "cloudfront_price_class" {
   type        = string
-  description = "PriceClass for CloudFront distribution"
+  description = "The PriceClass for CloudFront distribution"
   default     = "PriceClass_100"
 }
 
@@ -23,12 +23,12 @@ variable "force_destroy" {
 
 variable "index_document" {
   type        = string
-  description = "HTML file to show at root"
+  description = "The HTML file to use as the index document"
   default     = "index.html"
 }
 
 variable "tags" {
   type        = map(string)
-  description = "Tags"
+  description = "A key/value map to use for tagging resources"
   default     = {}
 }
