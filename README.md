@@ -46,12 +46,12 @@ A Terraform Module for building the infrastructure to host a static website. The
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aliases | Any other domain aliases to add to the CloudFront distribution | `list(string)` | `[]` | no |
-| cloudfront\_price\_class | PriceClass for CloudFront distribution | `string` | `"PriceClass_100"` | no |
+| aliases | Additional domain aliases to add to the CloudFront distribution | `list(string)` | `[]` | no |
+| cloudfront\_price\_class | The PriceClass for CloudFront distribution | `string` | `"PriceClass_100"` | no |
 | force\_destroy | The force\_destroy argument of the S3 bucket | `bool` | `true` | no |
-| fqdn | The FQDN of the website and also name of the S3 bucket | `string` | n/a | yes |
-| index\_document | HTML file to show at root | `string` | `"index.html"` | no |
-| tags | Tags | `map(string)` | `{}` | no |
+| fqdn | The primary FQDN of the website and also name of the S3 bucket | `string` | n/a | yes |
+| index\_document | The HTML file to use as the index document | `string` | `"index.html"` | no |
+| tags | A key/value map to use for tagging resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
