@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Terraform Security Scan
-        uses: aquasecurity/tfsec-action@v1.0.0
+        uses: aquasecurity/tfsec-action@v1.0.2
 
       - name: Terraform Setup ${{ matrix.python-version }}
         uses: hashicorp/setup-terraform@v1
