@@ -1,9 +1,19 @@
-data "aws_route53_zone" "external" {
-  name = var.fqdn
+locals {
+  route53_zone_id = var.use_existing_route53_zone ? data.aws_route53_zone.default[0].zone_id : aws_route53_zone.default[0].zone_id
+}
+
+data "aws_route53_zone" "default" {
+  count = var.use_existing_route53_zone ? 1 : 0
+  name  = var.fqdn
+}
+
+resource "aws_route53_zone" "default" {
+  count = var.use_existing_route53_zone ? 0 : 1
+  name  = var.fqdn
 }
 
 resource "aws_route53_record" "default" {
-  zone_id = data.aws_route53_zone.external.zone_id
+  zone_id = local.route53_zone_id
   name    = var.fqdn
   type    = "A"
 
@@ -17,7 +27,7 @@ resource "aws_route53_record" "default" {
 resource "aws_route53_record" "aliases" {
   count = length(var.aliases)
 
-  zone_id = data.aws_route53_zone.external.zone_id
+  zone_id = local.route53_zone_id
   name    = var.aliases[count.index]
   type    = "A"
 
@@ -35,7 +45,7 @@ resource "aws_route53_record" "validation" {
       name    = dvo.resource_record_name
       record  = dvo.resource_record_value
       type    = dvo.resource_record_type
-      zone_id = data.aws_route53_zone.external.zone_id
+      zone_id = local.route53_zone_id
     }
   }
 
