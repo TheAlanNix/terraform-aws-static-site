@@ -22,8 +22,8 @@ A Terraform Module for building the infrastructure to host a static website. The
 
 | Name | Version |
 |------|---------|
-| aws | 4.58.0 |
-| random | 3.4.3 |
+| aws | ~> 4.0 |
+| random | ~> 3.0 |
 
 ## Resources
 
