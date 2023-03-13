@@ -1,7 +1,7 @@
 # static-site-terraform-module
 
 ![GitHub release](https://img.shields.io/github/v/release/thealannix/static-site-terraform-module?sort=semver)
-![example workflow](https://github.com/thealannix/static-site-terraform-module/actions/workflows/terraform_tests.yml/badge.svg)
+![Terraform Tests](https://github.com/thealannix/static-site-terraform-module/actions/workflows/terraform-tests.yml/badge.svg)
 
 A Terraform Module for building the infrastructure to host a static website. The following will be deployed:
 - S3 Bucket
@@ -14,16 +14,16 @@ A Terraform Module for building the infrastructure to host a static website. The
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.0 |
-| aws | ~> 3.0 |
-| random | >= 2.1 |
+| terraform | >= 1.0 |
+| aws | ~> 4.0 |
+| random | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| random | >= 2.1 |
+| aws | ~> 4.0 |
+| random | ~> 3.0 |
 
 ## Resources
 
@@ -36,11 +36,17 @@ A Terraform Module for building the infrastructure to host a static website. The
 | [aws_route53_record.aliases](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.validation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_s3_bucket.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_public_access_block.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_route53_zone.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
+| [aws_s3_bucket.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_policy.allow_cloudfront_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_s3_bucket_versioning.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
+| [aws_s3_bucket_website_configuration.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) | resource |
 | [random_id.uniq](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [aws_iam_policy_document.bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_route53_zone.external](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
+| [aws_route53_zone.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 
@@ -52,6 +58,7 @@ A Terraform Module for building the infrastructure to host a static website. The
 | fqdn | The primary FQDN of the website and also name of the S3 bucket | `string` | n/a | yes |
 | index\_document | The HTML file to use as the index document | `string` | `"index.html"` | no |
 | tags | A key/value map to use for tagging resources | `map(string)` | `{}` | no |
+| use\_existing\_route53\_zone | A boolean representing whether to use an existing Route53 domain | `bool` | `true` | no |
 
 ## Outputs
 

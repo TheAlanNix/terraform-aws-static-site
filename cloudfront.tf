@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   origin {
     origin_id   = "origin-${var.fqdn}"
-    domain_name = aws_s3_bucket.main.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.default.bucket_regional_domain_name
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path
@@ -55,5 +55,4 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
   }
-
 }
