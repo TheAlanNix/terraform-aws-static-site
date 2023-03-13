@@ -3,7 +3,6 @@ resource "random_id" "uniq" {
 }
 
 #tfsec:ignore:aws-s3-enable-bucket-logging
-#tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "default" {
   bucket        = "${var.fqdn}-www-${random_id.uniq.hex}"
   force_destroy = var.force_destroy
@@ -59,6 +58,7 @@ data "aws_iam_policy_document" "bucket_policy" {
   }
 }
 
+#tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.default.id
 
